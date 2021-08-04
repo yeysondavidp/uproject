@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  nodo1:
+    image: covid19-blockchain
+    depends_on:
+      - nodo2
+      - nodo3
+    ports:
+    - 5000:5000
+
+  nodo2:
+    image: covid19-blockchain
+    ports:
+    - 5001:5000
+
+  nodo3:
+    image: covid19-blockchain
+    ports:
+      - 5002:5000
