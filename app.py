@@ -22,6 +22,7 @@ class Blockchain:
         parsed_url = urlparse(address)
         self.nodes.add(parsed_url.netloc)
 
+    #Remplazar la cadena por la del nodo mas actualizado
     def replace_chain(self):
         network = self.nodes
         longest_chain = None
@@ -31,7 +32,7 @@ class Blockchain:
             if response.status_code == 200:
                 length = response.json()['length']
                 chain = response.json()['chain']
-                if length > max_length and  self.is_chain_valid(chain):
+                if length > max_length and self.is_chain_valid(chain):
                     max_length = length
                     longest_chain = chain
             if longest_chain:
@@ -101,10 +102,10 @@ class Blockchain:
             block_index += 1
         return True
 
-# paso 2 - Se crea servicio REST para poder minar los bloques
+# 2 - Servicio REST
 app = Flask(__name__)
 
-#crear UUID como dirección del nodo
+
 node_address = str(uuid4()).replace('-','')
 
 blockchain = Blockchain()
